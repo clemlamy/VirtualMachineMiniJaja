@@ -1,0 +1,7 @@
+class TestArrayInArray {
+    main {
+        int tab[3];
+        int index[3];
+        tab[0] = index;
+    }
+}

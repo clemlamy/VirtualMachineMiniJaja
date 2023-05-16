@@ -1,0 +1,10 @@
+class Test {
+    
+    boolean var = true;
+
+
+    main {
+            boolean var = false;
+            write(var);
+    }
+}

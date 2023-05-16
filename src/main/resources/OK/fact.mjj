@@ -1,0 +1,27 @@
+/****************************************/
+/* Programme MiniJaja			*/
+/* Validation des appels recursifs	*/
+/****************************************/
+
+class factorielle{ 
+    int x=7;
+    
+    void pause(){
+	int i;};
+    
+    int fact(int x){
+        int retour;
+        if (x==0) {
+            retour=1;
+        }else{
+            retour=x*fact(x-1);
+        };
+        return retour;
+    };
+    
+    main {
+        int res=fact(x);
+        pause(); // res = 5040
+        write(res);
+    }
+}

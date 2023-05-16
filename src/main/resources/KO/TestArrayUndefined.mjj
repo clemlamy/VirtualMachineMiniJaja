@@ -1,0 +1,6 @@
+class TestArrayUndefined {
+    main {
+        int index0 = t[0];
+        int index1 = t[1];
+    }
+}

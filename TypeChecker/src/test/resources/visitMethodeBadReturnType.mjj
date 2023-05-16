@@ -1,0 +1,13 @@
+class test{
+    int equals(int x, int y){
+        return 0;
+    };
+
+    int equals(int x, int y){
+        return 0;
+    };
+
+    main{
+        int res = equals(1,2);
+    }
+}

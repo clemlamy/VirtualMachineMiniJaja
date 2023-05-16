@@ -1,0 +1,26 @@
+class Test {
+    final int size = 5;
+    boolean t[size];
+    boolean value;
+    
+    void afficher(){
+    	int i = 0;
+    	boolean x;
+    	while(size > i){
+    	    x = t[i];
+    	    i++;
+    	    writeln(x);
+    	};
+    };
+
+    main {
+        t[0] = true;
+        t[1] = false;
+        t[2] = true;
+        t[3] = false;
+        t[4] = t[0];
+        value = t[3];
+        afficher();
+        writeln(value);
+    }
+}

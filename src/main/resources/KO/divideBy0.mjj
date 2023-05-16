@@ -1,0 +1,6 @@
+class TestDivideBy0{
+    main{
+        int x = 5;
+        int y = 5/0;
+    }
+}

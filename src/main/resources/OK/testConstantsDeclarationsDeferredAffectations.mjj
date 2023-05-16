@@ -1,0 +1,12 @@
+class Test {
+
+    final int v;
+
+    main {
+        final boolean t;
+
+        v = 42;
+        t = false;
+        write(v);
+    }
+}

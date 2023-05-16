@@ -1,0 +1,5 @@
+class test{
+    main{
+        equals(1,2);
+    }
+}

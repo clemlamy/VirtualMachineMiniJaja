@@ -1,0 +1,62 @@
+class TestTypingIntBoolean{
+   int test(int i){
+   	return i+1;
+   };
+    main{
+        // Case 1
+        //int i = true;
+
+        // Case 2
+        //boolean b = 42;
+
+        // Case 3
+        //int ints[5];
+       	//ints[1] = true;
+
+       	// Case 4
+       	//boolean bools[5];
+       	//bools[1] = 42;
+
+       	// Case 5
+       	//int x;
+        //while(42 == true){
+        //    x = 12;
+        //};
+
+        // Case 6
+        //int x;
+        //if(42 == true){
+        //    x = 12;
+        //};
+
+        // Case 7
+        //int x;
+        //while(42){
+        //    x = 12;
+        //};
+
+        // Case 8
+        //int x;
+        //if(42){
+        //    x = 12;
+        //};
+
+        // Case 9
+        //int r = 42 / true;
+
+        // Case 10
+        //int r = 42 + true;
+
+        // Case 11
+        //int r = 42 - true;
+
+        // Case 12
+        //int r = 42 * true;
+
+        // Case 13
+        //boolean res = test(5);
+
+        // Case 14
+        //int res = test(true);
+    }
+}

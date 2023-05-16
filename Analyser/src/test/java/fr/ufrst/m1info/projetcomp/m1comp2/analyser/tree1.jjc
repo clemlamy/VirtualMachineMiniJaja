@@ -1,0 +1,8 @@
+Init
+Push(3)
+New(x,entier,var,3)
+Push(5)
+Store(x)
+Push(6)
+Pop()
+JCStop()

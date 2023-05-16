@@ -1,0 +1,50 @@
+/********************************/
+/* Programme MiniJaja		*/
+/* Validation de la synonimie	*/
+/********************************/
+
+class synonymie {
+	int t[4];
+	int taille = 4;
+	
+	void f(int x) {
+		int t1[10];
+		int i = 0;
+
+		while(10 > i) {
+			t1[i] = x;
+			i++;
+		};
+		t = t1;
+		t[x] = taille;
+	};
+
+	void pause() {
+	};
+	
+	void afficher(){
+    		int x;
+    		int i = 0;
+    		while(i < 10){
+    			x = t[i];
+    			write(x);
+    			i++;
+    		};
+    	};
+
+	main {
+		int i = 0;
+
+		while (4 > i) {
+			t[i] = taille - i;
+			i++;
+		};
+		f(3);
+		pause();// resultat t=[3,3,3,4,3,3,3,3,3,3]
+		afficher();
+		f(7);
+		writeln("");
+		pause(); //  resultat t=[7,7,7,7,7,7,7,4,7,7]
+		afficher();
+	}
+}

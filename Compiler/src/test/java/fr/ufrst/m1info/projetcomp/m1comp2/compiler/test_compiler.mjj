@@ -1,0 +1,12 @@
+class c {
+    int i = 3;
+    boolean b ;
+    main {
+        final int f_var = 5;
+        write("Hello world");
+        writeln(i);
+        i=4;
+        i+=7;
+        i++;
+    }
+}

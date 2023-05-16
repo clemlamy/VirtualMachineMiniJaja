@@ -1,0 +1,360 @@
+options {
+    MULTI = true;
+    VISITOR = true;
+    NODE_SCOPE_HOOK = true;
+}
+
+PARSER_BEGIN(MiniJaja)
+
+    package fr.ufrst.m1info.projetcomp.m1comp2.analyser.mjj;
+
+    public class MiniJaja {
+        public static void main(String[] args) {
+            System.out.println("Reading from standard input...");
+            MiniJaja mjj = new MiniJaja(System.in);
+            try {
+                SimpleNode n = mjj.Start();
+                n.dump("");
+                //MiniJajaVisitor dumpVisitor = new MiniJajaDumpVisitor();
+                //n.jjtAccept(dumpVisitor, null);
+            } catch (Exception e) {
+                System.out.println("Oops.");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
+        }
+    }
+
+PARSER_END(MiniJaja)
+
+
+
+SKIP :
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+| <"//" (~["\n","\r"])* ("\n"|"\r"|"\r\n")>
+| <"/*" (~["*"])* "*" (~["/"] (~["*"])* "*")* "/">
+}
+
+TOKEN : /* Reserved keywords */
+{
+      < CLASS: "class">
+    | < FINAL: "final">
+    | < MAIN: "main">
+    | < RETURN: "return">
+    | < WRITE: "write">
+    | < WRITELN: "writeln">
+    | < IF: "if">
+    | < ELSE: "else">
+    | < WHILE: "while">
+    | < LENGTH: "length">
+    | < TRUE: "true">
+    | < FALSE: "false">
+}
+
+TOKEN : /* Separators */
+{
+      < LBRACE: "{">
+    | < RBRACE: "}">
+    | < SEMICOLON: ";">
+    | < COMMA: ",">
+    | < LPAR: "(">
+    | < RPAR: ")">
+    | < LBRACKET: "[">
+    | < RBRACKET: "]">
+}
+
+TOKEN:/* Operators */
+{
+    <EQ:"==">
+  | <ASSIGN:"=">
+  | <BANG:"!">
+  | <INCR:"++">
+  | <PLUSASSIGN:"+=">
+  | <PLUS:"+">
+  | <MINUS:"-">
+  | <STAR:"*">
+  | <SLASH:"/">
+  | <OR:"||">
+  | <AND:"&&">
+  | <GT:">">
+  | <LT:"<">
+  | <QUOTE:"\"">
+}
+
+TOKEN : /* void */
+{
+  < VOID: "void">
+}
+
+TOKEN : /* int */
+{
+  < INT: "int" >
+}
+
+TOKEN : /* boolean */
+{
+  < BOOLEAN: "boolean" >
+}
+
+TOKEN : /* nombre */
+{
+  < NOMBRE: (<DIGIT>)+ >
+}
+
+
+TOKEN : /* string */
+{
+    < STRING: "\"" (~["\""])* "\"" >
+}
+
+TOKEN : /* ident */
+{
+  < IDENT: (<LETTER> | "_") (<LETTER>|<DIGIT>|"_")* >
+|
+  < #LETTER: ["a"-"z", "A"-"Z"] >
+|
+  < #DIGIT: ["0"-"9"] >
+}
+
+SimpleNode Start() : {}
+{
+    classe() { return jjtThis; }
+}
+
+//------------------------------------------ FUNCTION
+
+
+void classe() #classe : {}
+{
+  <CLASS> ident() <LBRACE> decls() methmain() <RBRACE>
+}
+
+void ident() #ident : {}
+{
+  <IDENT> { jjtThis.jjtSetValue(token.image); }
+}
+
+void decls() #void : {}
+{
+    decl() <SEMICOLON> decls() #decls(2)
+    | {}                       #vnil
+}
+
+void decl() #void : {}
+{
+    <FINAL> type() ident() vexp() #cst(3)
+    | typemeth() ident() decl_()
+}
+
+void decl_() #void : {}
+{
+	<LBRACKET> exp() <RBRACKET>                                        #tableau(3)
+  | <LPAR> entetes() <RPAR> <LBRACE> vars() instrs() <RBRACE> #methode(5)
+  |  vexp()                                              #var(3)
+}
+
+void vars() #void : {}
+{
+    var() <SEMICOLON> vars() #vars(2)
+    | {}             #vnil
+}
+
+void var() #void : {}
+{
+    typemeth() ident() var_()
+    | <FINAL> type() ident() vexp() #cst(3)
+}
+
+void var_() #void : {}
+{
+    <LBRACKET> exp() <RBRACKET> #tableau(3)
+    |  vexp()            #var(3)
+}
+
+void vexp() : {}
+{
+    <ASSIGN> exp()
+    | {} #omega
+}
+
+void methmain() #main(2) : {}
+{
+    <MAIN> <LBRACE> vars() instrs() <RBRACE>
+}
+
+void entetes() #void : {}
+{
+    entete() entetes_() #entetes(2)
+    | {}                #enil
+}
+
+void entetes_() #void : {} {
+	<COMMA> entete() entetes_() #entetes(2)
+  | {}                      #enil
+}
+
+void entete() #void : {}
+{
+  type() ident() #entete(2)
+}
+
+void instrs() #void : {}
+{
+	instr() <SEMICOLON> instrs() #instrs(2)
+    | {}                         #inil
+}
+
+void instr() #void : {}
+{
+    ident() instr_()
+    | <RETURN> exp() #retour
+    | <WRITE> <LPAR> string_or_ident() <RPAR> #ecrire(1)
+    | <WRITELN> <LPAR> string_or_ident() <RPAR> #ecrireln(1)
+    | <IF> <LPAR> exp() <RPAR> <LBRACE> instrs() <RBRACE> _else() #si(3)
+    | <WHILE> <LPAR> exp() <RPAR> <LBRACE> instrs() <RBRACE> #tantque(2)
+}
+
+void string_or_ident() #void : {}
+{
+    chaine() | ident()
+}
+
+void instr_() #void : {}
+{
+    ident_() instr__()
+    | <LPAR> listexp() <RPAR> #appelI(2)
+}
+
+void ident_() #void : {}
+{
+	[ <LBRACKET> exp() <RBRACKET> #tab(2) ]
+}
+
+void instr__() #void : {}
+{
+    <ASSIGN> exp()       #affectation(2)
+    | <PLUSASSIGN> exp() #somme(2)
+    | <INCR>             #increment(1)
+}
+
+void _else() # void : {}
+{
+    <ELSE> <LBRACE> instrs() <RBRACE>
+    | {} #inil
+}
+
+void listexp() #void : {}
+{
+    exp() listexp_() #listexp(2)
+    | {}             #exnil
+}
+
+void listexp_() #void : {}
+{
+    <COMMA> exp() listexp_() #listexp(2)
+    | {}                     #exnil
+}
+
+void exp() #void : {}
+ {
+    <BANG> exp1() #non
+    | <MINUS> exp1() #neg
+    | exp1() exp_()
+ }
+
+void exp_() #void : {}
+ {
+    [
+        <AND> exp1() exp_() #et(2)
+        | <OR> exp1() exp_() #ou(2)
+    ]
+ }
+
+void exp1() #void : {}
+ {
+   exp2() exp1_()
+ }
+
+void exp1_() #void : {}
+ {
+    [
+        <EQ> exp2()   #egal(2)
+        | <LT> exp2() #inf(2)
+        | <GT> exp2()  #sup(2)
+    ]
+ }
+
+void exp2() #void : {}
+ {
+    terme() exp2_()
+ }
+
+void exp2_() #void : {}
+ {
+    [
+        <PLUS> terme() exp2_() #plus(2)
+        | <MINUS> terme() exp2_() #moins(2)
+    ]
+ }
+
+void terme() #void : {}
+ {
+   fact() terme_()
+ }
+
+void terme_() #void : {}
+ {
+    [
+        <STAR> fact() terme_() #mult(2)
+        | <SLASH> fact() terme_() #div(2)
+    ]
+ }
+
+void fact() #void : {}
+{
+    ident() fact_()
+    | <LENGTH> <LPAR> <IDENT> <RPAR> #longueur(1)
+    | <TRUE> #vrai
+    | <FALSE> #faux
+    | nbre()
+    | <LPAR> exp() <RPAR>
+    
+}
+
+void fact_() #void : {}
+{
+    (<LPAR> listexp() <RPAR>) #appelE(2)
+    | ident_()
+}
+
+void nbre() #nbre : {int x;} {
+	<NOMBRE> {
+		try { x = Integer.parseInt(token.image);
+		} catch (NumberFormatException ee) {
+		   System.err.println("Error: " + token.image + " is not a number.");
+		   x = 0;
+		}
+		jjtThis.jjtSetValue(x);
+	}
+}
+
+void typemeth() #void : {}
+{
+    <VOID> #rien
+    | type()
+}
+
+void type() #void : {}
+{
+    <INT>       #entier
+    | <BOOLEAN> #booleen
+}
+
+void chaine() #chaine : {}
+{
+  <STRING> { jjtThis.jjtSetValue(token.image); }
+}

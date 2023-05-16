@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import org.fxmisc.richtext.CodeArea?>
+<?import org.fxmisc.flowless.VirtualizedScrollPane?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.MenuButton?>
+<BorderPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="fr.ufrst.m1info.projetcomp.m1comp2.gui.IDEController" fx:id="mainParentPanel">
+    <top>
+        <MenuBar prefHeight="26.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="New" onAction="#newFile">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" text="Open…" onAction="#openFile">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" text="Close" onAction="#closeFile" fx:id="closeFileBtn">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="W" control="DOWN" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
+                        <SeparatorMenuItem mnemonicParsing="false"/>
+                        <MenuItem mnemonicParsing="false" text="Save" onAction="#saveFile" fx:id="saveFileBtn">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" text="Save As…" onAction="#saveFileAs" fx:id="saveFileAsBtn">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN"
+                                                    shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
+                        <SeparatorMenuItem mnemonicParsing="false"/>
+                        <MenuItem mnemonicParsing="false" text="Quit" onAction="#quitIde"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Undo" onAction="#undo">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" text="Redo" onAction="#redo">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="DOWN"
+                                                    shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Window">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Jaja Code" onAction="#toggleJajaCodePanel" fx:id="jajaCodeMenuItem"/>
+                        <MenuItem mnemonicParsing="false" text="Memory" onAction="#toggleMemoryPanel" fx:id="memoryMenuItem"/>
+                        <MenuItem mnemonicParsing="false" text="Console Mini Jaja" onAction="#toggleMiniJajaConsolePanel" fx:id="miniJajaConsoleMenuItem"/>
+                        <MenuItem mnemonicParsing="false" text="Console Jaja Code" onAction="#toggleJajaCodeConsolePanel" fx:id="jajaCodeConsoleMenuItem"/>
+                        <MenuItem mnemonicParsing="false" text="Dark mode" onAction="#toogleDarkMode" fx:id="darkmodeMenuItem"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About MiniJaja IDE" onAction="#about"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <center>
+        <BorderPane BorderPane.alignment="CENTER">
+            <top>
+                <ButtonBar buttonMinWidth="30" prefWidth="200.0" BorderPane.alignment="CENTER" fx:id="buttonBar">
+                    <buttons>
+                        <Button mnemonicParsing="false" onAction="#compile"
+                                ButtonBar.buttonData="RIGHT" fx:id="compileBtn">
+                            <tooltip>
+                                <Tooltip text="Compile"/>
+                            </tooltip>
+                        </Button>
+                        <MenuButton mnemonicParsing="false" ButtonBar.buttonData="RIGHT"  fx:id="debugBtn">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Debug Mini Jaja" onAction="#debugMiniJaja"/>
+                                <MenuItem mnemonicParsing="false" text="Debug Jaja Code" onAction="#debugJajaCode"/>
+                            </items>
+                            <tooltip>
+                                <Tooltip text="Debug"/>
+                            </tooltip>
+                        </MenuButton>
+                        <Button mnemonicParsing="false" onAction="#debugStepInto"
+                                ButtonBar.buttonData="RIGHT" fx:id="debugStepIntoBtn">
+                            <tooltip>
+                                <Tooltip text="Step into"/>
+                            </tooltip>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#debugStepOver"
+                                ButtonBar.buttonData="RIGHT" fx:id="debugStepOverBtn">
+                            <tooltip>
+                                <Tooltip text="Step over"/>
+                            </tooltip>
+                        </Button>
+                        <MenuButton mnemonicParsing="false" ButtonBar.buttonData="RIGHT"  fx:id="runBtn">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Run Mini Jaja" onAction="#runMiniJaja"/>
+                                <MenuItem mnemonicParsing="false" text="Run Jaja Code" onAction="#runJajaCode"/>
+                            </items>
+                            <tooltip>
+                                <Tooltip text="Run"/>
+                            </tooltip>
+                        </MenuButton>
+                        <Button mnemonicParsing="false" onAction="#stop"
+                                ButtonBar.buttonData="RIGHT" fx:id="stopBtn">
+                            <tooltip>
+                                <Tooltip text="Stop"/>
+                            </tooltip>
+                        </Button>
+                    </buttons>
+                </ButtonBar>
+            </top>
+            <center>
+                <SplitPane dividerPositions="0.75" orientation="VERTICAL" BorderPane.alignment="CENTER"
+                           fx:id="mainSplitPanel">
+                    <items>
+                        <SplitPane dividerPositions="0.45, 0.75" fx:id="secondSplitPanel">
+                            <items>
+                                <BorderPane>
+                                    <top>
+                                        <HBox prefHeight="15.0" BorderPane.alignment="CENTER">
+                                            <children>
+                                                <Label text="Mini Jaja"/>
+                                            </children>
+                                            <padding>
+                                                <Insets left="12.0"/>
+                                            </padding>
+                                        </HBox>
+                                    </top>
+                                    <center>
+                                        <VirtualizedScrollPane>
+                                            <content>
+                                                <CodeArea BorderPane.alignment="CENTER" fx:id="miniJajaTextArea"/>
+                                            </content>
+                                        </VirtualizedScrollPane>
+                                    </center>
+                                </BorderPane>
+                                <BorderPane fx:id="jajaCodePanel">
+                                    <top>
+                                        <HBox prefHeight="15.0" BorderPane.alignment="CENTER">
+                                            <children>
+                                                <Label text="Jaja Code"/>
+                                            </children>
+                                            <padding>
+                                                <Insets left="12.0"/>
+                                            </padding>
+                                        </HBox>
+                                    </top>
+                                    <center>
+                                        <VirtualizedScrollPane>
+                                            <content>
+                                                <CodeArea BorderPane.alignment="CENTER" fx:id="jajaCodeTextArea"/>
+                                            </content>
+                                        </VirtualizedScrollPane>
+                                    </center>
+                                </BorderPane>
+                                <BorderPane fx:id="memoryPanel">
+                                    <top>
+                                        <HBox prefHeight="15.0" BorderPane.alignment="CENTER">
+                                            <children>
+                                                <Label text="Memory"/>
+                                            </children>
+                                            <padding>
+                                                <Insets left="12.0"/>
+                                            </padding>
+                                        </HBox>
+                                    </top>
+                                    <center>
+                                        <ScrollPane fitToWidth="true">
+                                            <VBox fx:id="memoryGridPane"/>
+                                        </ScrollPane>
+                                    </center>
+                                </BorderPane>
+                            </items>
+                        </SplitPane>
+                        <SplitPane dividerPositions="0.5" BorderPane.alignment="CENTER" fx:id="consoleSplitPanel">
+                            <items>
+                                <BorderPane fx:id="consoleMiniJajaPanel">
+                                    <top>
+                                        <HBox prefHeight="15.0" BorderPane.alignment="CENTER">
+                                            <children>
+                                                <Label text="Output MiniJaja"/>
+                                            </children>
+                                            <padding>
+                                                <Insets left="12.0"/>
+                                            </padding>
+                                        </HBox>
+                                    </top>
+                                    <center>
+                                        <CodeArea editable="false" BorderPane.alignment="CENTER" fx:id="miniJajaOutputArea"/>
+                                    </center>
+                                </BorderPane>
+                                <BorderPane fx:id="consoleJajaCodePanel">
+                                    <top>
+                                        <HBox prefHeight="15.0" BorderPane.alignment="CENTER">
+                                            <children>
+                                                <Label text="Output JajaCode"/>
+                                            </children>
+                                            <padding>
+                                                <Insets left="12.0"/>
+                                            </padding>
+                                        </HBox>
+                                    </top>
+                                    <center>
+                                        <CodeArea editable="false" BorderPane.alignment="CENTER" fx:id="jajaCodeOutputArea"/>
+                                    </center>
+                                </BorderPane>
+                            </items>
+                        </SplitPane>
+                    </items>
+                </SplitPane>
+            </center>
+        </BorderPane>
+    </center>
+</BorderPane>

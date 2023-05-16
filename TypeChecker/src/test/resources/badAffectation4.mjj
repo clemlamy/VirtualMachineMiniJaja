@@ -1,0 +1,7 @@
+class test{
+    main{
+        boolean i = 0;
+        boolean t[5];
+        i = t;
+    }
+}

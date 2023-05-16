@@ -1,0 +1,78 @@
+/************************************************/
+/* Programme MiniJaja				*/
+/* Utilisation des tableaux avec un tri 	*/
+/************************************************/
+
+class quicksort{ 
+    final int longueur=20;
+    int tableau[longueur];
+    
+    int partition(int deb, int fin) { 
+        int compt=deb; 
+        int pivot=tableau[deb]; 
+        int i=deb+1; 
+        int temp; 
+    
+        while(fin>i || i==fin) { 
+            if(pivot>tableau[i]) { 
+                compt++; 
+                temp=tableau[compt]; 
+                tableau[compt]=tableau[i]; 
+                tableau[i]=temp; 
+            }; 
+        i++; 
+        }; 
+        temp=tableau[compt]; 
+        tableau[compt]=tableau[deb]; 
+        tableau[deb]=temp; 
+        return(compt); 
+    }; 
+    
+    void pause(){
+    };
+    
+    void trirapide(int debut,int fin) { 
+        int pivot; 
+        if(fin>debut) { 
+            pivot=partition(debut,fin); 
+            trirapide(debut,pivot-1); 
+            trirapide(pivot+1,fin); 
+        }; 
+    }; 
+    
+    void afficher(){
+    	int x;
+    	int i = 0;
+    	while(i < longueur){
+    		x = tableau[i];
+    		writeln(x);
+    		i++;
+    	};
+    };
+    
+    main {
+        tableau[0]=5; 
+        tableau[1]=2; 
+        tableau[2]=10; 
+        tableau[3]=11; 
+        tableau[4]=4;
+        tableau[5]=52; 
+        tableau[6]=13; 
+        tableau[7]=12; 
+        tableau[8]=5; 
+        tableau[9]=1; 
+        tableau[10]=62; 
+        tableau[11]=32; 
+        tableau[12]=14; 	    
+        tableau[13]=16; 
+        tableau[14]=9; 
+        tableau[15]=8; 
+        tableau[16]=3; 
+        tableau[17]=21; 
+        tableau[18]=29; 
+        tableau[19]=23; 
+        trirapide(0,longueur-1); 
+        pause();
+        afficher();
+    }
+}

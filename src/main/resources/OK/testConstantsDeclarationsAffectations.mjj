@@ -1,0 +1,8 @@
+class Test {
+
+    final int v = 15;
+
+    main {
+        final boolean t = false;
+    }
+}

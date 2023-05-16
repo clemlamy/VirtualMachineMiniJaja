@@ -1,0 +1,249 @@
+options {
+    MULTI=true;
+    VISITOR=true;
+    //  VISITOR_EXCEPTION="jajacode.exception.JajaCodeVisitorException";
+}
+
+PARSER_BEGIN(JajaCode)
+
+    package fr.ufrst.m1info.projetcomp.m1comp2.analyser.jjc;
+
+    public class JajaCode {
+        public static void main (String arg[]) throws ParseException {
+            JajaCode jjc = new JajaCode(System.in) ;
+            try {
+                SimpleNode n = jjc.Start();
+                n.dump("");
+            } catch (Exception e) {
+                System.out.println("Oops.");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
+        }
+    }
+
+PARSER_END(JajaCode)
+
+/** ----------------- Regles lexicales ------------------------ */
+SKIP : { " "   |   "\r"   |  "\n"  |  "\t" }
+TOKEN : {
+     < ADD: "add" >
+  |  < AINC: "ainc" >
+  |  < ALOAD: "aload" >
+  |  < AND: "and" >
+  |  < ASTORE: "astore" >
+  |  < BOOLEEN : "booleen">
+  |  < CST : "cst">
+  |  < CMP: "cmp" >
+  |  < DIV: "div" >
+  |  < ENTIER : "entier">
+  |  < FALSE: "false" >
+  |  < GOTO: "goto" >
+  |  < IF: "if" >
+  |  < INC: "inc" >
+  |  < INF: "inf" >
+  |  < INIT: "init" >
+  |  < INVOKE: "invoke" >
+  |  < JCSTOP: "jcstop" >
+  |  < LOAD: "load" >
+  |  < METH : "meth">
+  |  < MUL: "mul" >
+  |  < NEG: "neg" >
+  |  < NEWARRAY: "newarray" >
+  |  < NEW: "new" >
+  |  < NOP: "nop" >
+  |  < NOT: "not" >
+  |  < OR: "or" >
+  |  < POP: "pop" >
+  |  < PUSH: "push" >
+  |  < RETURN: "return" >
+  |  < STORE: "store" >
+  |  < SUB: "sub" >
+  |  < SUP: "sup" >
+  |  < SWAP: "swap" >
+  |  < TRUE: "true" >
+  |  < POINTVIRGULE: ";" >
+  |  < PAROUV: "(" >
+  |  < PARFERM: ")" >
+  |  < VIRGULE: "," >
+  |  < VAR : "var">
+  |  < VOID : "void">
+  |  < WRITE : "write">
+  |  < WRITELN : "writeln">
+  |  < LENGTH : "length">
+  |  < IDENTIFIER: (["a"-"z","A"-"Z"]) (["a"-"z","A"-"Z","0"-"9","_"])* >
+  |  < NOMBRE: (["0"-"9"]) (["0"-"9"])* >
+  |  < STRING: "\"" (~["\""])* "\"" >
+}
+/** -------------------- Grammaire  ------------------------- */
+/**
+ *  <classe>             := <adresse> <instrs> ";" <classe>
+ *                       :=
+ *  <instrs>             := "init"
+ *						 := "swap"
+ *						 := "new" "(" <ident> "," <type> "," <sorte> "," <adresse> ")"
+ *						 := "newarray" "(" <ident> "," <type> ")"
+ *                       := "invoke" "(" <ident> ")"
+ *                       := "return"
+ *                       := "push" "(" <valeur> ")"
+ *                       := "pop"
+ *                       := "load" "(" <ident> ")"
+ *                       := "aload" "(" <ident> ")"
+ *                       := "store" "(" <ident> ")"
+ *                       := "astore" "(" <ident> ")"
+ *                       := "if" "(" <adresse> ")"
+ *                       := "goto" "(" <adresse> ")"
+ *                       := "inc" "(" <ident> ")"
+ *                       := "ainc" "(" <ident> ")"
+ *                       := <oper>
+ *                       := "nop"
+ *                       := "jcstop"
+ *  <ident>              := ["a-"z","A"-"Z"] (["a-"z","A"-"Z","0"-"9"])*
+ *  <type>               := "entier"
+ *                       := "booleen"
+ *                       := "void"
+ *  <sorte>              := "var"
+ *                       := "meth"
+ *                       := "cst"
+ *  <nombre>             := ["0"-"9"] (["0"-"9"])*
+ *                       := "vrai"
+ *                       := "faux"
+ *						 :=
+ *  <oper>               := <oper2>
+ *                       := <oper1>
+ *  <oper1>              := "neg"
+ *                       := "not"
+ *  <oper2>              := "add"
+ *                       := "sub"
+ *                       := "mul"
+ *                       := "div"
+ *                       := "cmp"
+ *                       := "sup"
+ *                       := "or"
+ *                       := "and"
+ *
+ **/
+
+ SimpleNode Start() : {}
+ {
+    Classe() { return jjtThis;}
+ }
+
+/** ---------------- Regles syntaxiques --------------------- */
+
+
+void Classe() #void : {} {
+     Adresse() Instrs() <POINTVIRGULE> Classe() #JajaCode(3)
+     | {} #JCNil
+}
+
+void Instrs() #void : {} {
+    <INIT> #Init
+    | <SWAP> #Swap
+    | <NEW> <PAROUV> Ident() <VIRGULE> Type() <VIRGULE> Sorte() <VIRGULE> Adresse() <PARFERM> #New(4)
+    | <NEWARRAY> <PAROUV> Ident() <VIRGULE> Type() <PARFERM> #NewArray(2)
+    | <INVOKE> <PAROUV> Ident() <PARFERM> #Invoke(1)
+    | <RETURN> #Return
+    | <WRITE> #Write
+    | <WRITELN> #Writeln
+    | <PUSH> <PAROUV> Valeur() <PARFERM> #Push(1)
+    | <POP> #Pop
+    | <LOAD> <PAROUV> Ident() <PARFERM> #Load(1)
+    | <ALOAD> <PAROUV> Ident() <PARFERM> #ALoad(1)
+    | <STORE> <PAROUV> Ident() <PARFERM> #Store(1)
+    | <ASTORE> <PAROUV> Ident() <PARFERM> #AStore(1)
+    | <IF> <PAROUV> Adresse() <PARFERM> #If(1)
+    | <GOTO> <PAROUV> Adresse() <PARFERM> #Goto(1)
+    | <INC> <PAROUV> Ident() <PARFERM> #Inc(1)
+    | <AINC> <PAROUV> Ident() <PARFERM> #AInc(1)
+    | <LENGTH> <PAROUV> Ident() <PARFERM> #Length(1)
+    | <NOP> #Nop
+    | <JCSTOP> #JCStop
+    | Oper()
+}
+
+void Ident() #JCIdent : {} {
+	<IDENTIFIER> { jjtThis.jjtSetValue(token.image); }
+}
+
+void Type() #JCType : {} {
+	( <ENTIER> | <BOOLEEN> | <VOID> ) { jjtThis.jjtSetValue(token.image); }
+}
+
+void Sorte() #JCSorte : {} {
+	( <VAR> | <METH> | <CST> ) { jjtThis.jjtSetValue(token.image); }
+}
+
+void Valeur() #void : {} {
+	  ValTrue()
+	| ValFalse()
+	| Nombre()
+	| String()
+	| {} #JCNil
+}
+
+void Adresse() #void : {} {
+	Nombre()
+}
+
+void Oper() #void : {} {
+	Oper2() | Oper1()
+}
+
+void Oper1() #void : {} {
+	  <NEG> #Neg
+	| <NOT> #Not
+}
+
+void Oper2() #void : {} {
+	  <ADD> #Add
+	| <SUB> #Sub
+	| <MUL> #Mul
+	| <DIV> #Div
+	| <CMP> #Cmp
+	| <SUP> #Sup
+	| <INF> #Inf
+	| <OR> #Or
+	| <AND> #And
+}
+
+void Nombre() #JCNbre() : { int x = 0; } {
+    <NOMBRE> {
+    	try {
+    		x = Integer.parseInt(token.image);
+        } catch (NumberFormatException ee) {
+        	System.err.println("Error: " + token.image + " is not a number.");
+        	x = 0;
+        }
+        jjtThis.jjtSetValue(x);
+    }
+}
+
+void ValTrue() #JCVrai : { boolean x = true; } {
+    <TRUE> {
+    	try {
+    		x = Boolean.parseBoolean(token.image);
+        } catch (Exception ee) {
+        	System.err.println("Error: " + token.image + " is not a number.");
+        	x = 0;
+        }
+        jjtThis.jjtSetValue(x);
+    }
+}
+
+void ValFalse() #JCFaux : { boolean x = true; } {
+    <FALSE> {
+    	try {
+    		x = Boolean.parseBoolean(token.image);
+        } catch (Exception ee) {
+        	System.err.println("Error: " + token.image + " is not a number.");
+        	x = 0;
+        }
+        jjtThis.jjtSetValue(x);
+    }
+}
+
+void String() #JCString : {}
+{
+    <STRING> { jjtThis.jjtSetValue(tokem.image); }
+}

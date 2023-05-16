@@ -1,0 +1,8 @@
+class Test {
+
+    main {
+        if(!(true == false)) {
+        	write("differents");
+        };
+    }
+}

@@ -1,0 +1,44 @@
+/************************************************/
+/* Programme MiniJaja				*/
+/* Validation de toutes les instructions	*/
+/************************************************/
+
+class C {
+  int x;
+  int y = 10;
+  boolean b1 = false;
+  boolean b2 = false;
+
+  int  somme( int max) {
+  	int t = 5;
+
+	while ( max > 0) { 
+		t += max;
+		max = max - 1;
+	};
+	return t;
+   };
+
+   boolean test(int a, int b) {
+	return a > b;
+   };
+
+   void f(int z){
+   	x = y * z;
+	x = x / z;
+	x++;
+   };
+   
+   main {
+ 	if (test(y,9) && (b1 || (!b2))) {
+		x = somme(2); // x = 8
+	} else {
+		x++;
+	};
+	f(10); // x = 11;
+	write(x);
+   }
+}
+
+
+	

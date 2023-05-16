@@ -1,0 +1,7 @@
+class test{
+    main{
+        int i = 0;
+        int t[5];
+        t = i;
+    }
+}

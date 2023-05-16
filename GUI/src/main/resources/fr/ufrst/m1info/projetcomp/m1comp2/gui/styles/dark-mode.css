@@ -1,0 +1,244 @@
+/*
+ * This is an adjustment of the original modena.css for a consistent dark theme.
+ * Original modena.css here: https://gist.github.com/maxd/63691840fc372f22f470.
+ */
+
+/* Redefine base colors */
+.root {
+
+    -fx-text-inner-color: rgb(220, 220, 220);
+    -fx-base: #3c3f41;
+    -fx-background: #3c3f41;
+
+    /* make controls (buttons, thumb, etc.) slightly lighter */
+    -fx-color: derive(-fx-base, 10%);
+
+    /* text fields and table rows background */
+    -fx-control-inner-background: #2b2b2b;
+    /* version of -fx-control-inner-background for alternative rows */
+    -fx-control-inner-background-alt: derive(-fx-control-inner-background, 2.5%);
+
+    /* default color */
+    -fx-text-background-color: rgb(220, 220, 220);
+
+    /* text colors depending on background's brightness */
+    -fx-light-text-color: rgb(220, 220, 220);
+    -fx-mid-text-color: rgb(100, 100, 100);
+    -fx-dark-text-color: rgb(20, 20, 20);
+
+    /* A bright blue for highlighting/accenting objects.  For example: selected
+     * text; selected items in menus, lists, trees, and tables; progress bars */
+    -fx-accent: rgb(53, 145, 195);
+
+    /* color of non-focused yet selected elements */
+    -fx-selection-bar-non-focused: #2b2b2b;
+}
+
+.menu-bar {
+    -fx-background-color: #3c3f41;
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-width: 0.75;
+    -fx-border-color: #343636;
+}
+
+
+/* Fix derived prompt color for text fields */
+.text-input {
+    -fx-prompt-text-fill: derive(-fx-control-inner-background, +50%);
+}
+
+/* Keep prompt invisible when focused (above color fix overrides it) */
+.text-input:focused {
+    -fx-prompt-text-fill: transparent;
+}
+
+/* Fix scroll bar buttons arrows colors */
+.scroll-bar > .increment-button > .increment-arrow,
+.scroll-bar > .decrement-button > .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color, rgb(220, 220, 220);
+}
+
+.scroll-bar > .increment-button:hover > .increment-arrow,
+.scroll-bar > .decrement-button:hover > .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color, rgb(240, 240, 240);
+}
+
+.scroll-bar > .increment-button:pressed > .increment-arrow,
+.scroll-bar > .decrement-button:pressed > .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color, rgb(255, 255, 255);
+}
+
+.styled-text-area {
+    -fx-background-color: #2b2b2b;
+}
+
+.styled-text-area .selection {
+    -fx-fill: #214283;
+}
+
+.styled-text-area .text {
+    -fx-fill: #A9B7C6; /* default color text in text-area */
+}
+
+.styled-text-area .text.keyword {
+    -fx-fill: #CC7832;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.operator {
+    -fx-fill: #A9B7C6;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.function {
+    -fx-fill: #FFC66D;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.boolean {
+    -fx-fill: #CC7832;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.variable {
+    -fx-fill: #A9B7C6;
+}
+
+.styled-text-area .text.integer {
+    -fx-fill: #6897BB;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.semicolon {
+    -fx-fill: #CC7832;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.paren {
+    -fx-fill: #A9B7C6;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.bracket {
+    -fx-fill: #A9B7C6;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.brace {
+    -fx-fill: #A9B7C6;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.string {
+    -fx-fill: #6A8759;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.comment {
+    -fx-fill: #629755;
+    -fx-font-style: italic;
+}
+
+.styled-text-area#miniJajaTextArea .paragraph-box:has-caret {
+    -fx-background-color: #323232;
+}
+
+.styled-text-area#jajaCodeTextArea .paragraph-box:has-caret,
+.styled-text-area#miniJajaOutputArea .paragraph-box:has-caret,
+.styled-text-area#jajaCodeOutputArea .paragraph-box:has-caret {
+    -fx-background-color: transparent;
+}
+
+.styled-text-area .lineno {
+    -fx-background-color: transparent;
+}
+
+.styled-text-area .text.succeed {
+    -fx-fill: #489352;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.error {
+    -fx-fill: #C75450;
+    -fx-font-weight: bold;
+}
+
+.error-line {
+    -rtfx-background-color: rgb(150, 0, 0);
+}
+
+.debug-line {
+    -rtfx-background-color: rgb(69, 82, 101);
+}
+
+.line {
+    -rtfx-background-color: transparent;
+}
+
+
+.styled-text-area .text.warning {
+    -fx-fill: #CC7832;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.error-highlight {
+    -fx-fill: #C75450;
+    -fx-underline: true;
+    -fx-font-weight: bold;
+}
+
+.button#compileBtn {
+    -fx-text-fill: #489352;
+}
+
+.button#debugBtn {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-text-alignment: center;
+    -fx-border-radius: 5;
+    -fx-text-fill: #489352;
+}
+
+.button#runBtn {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-text-alignment: center;
+    -fx-border-radius: 5;
+    -fx-text-fill: #489352;
+}
+
+.button#stopBtn {
+    -fx-text-fill: #C75450;
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-text-alignment: center;
+    -fx-border-radius: 5;
+}
+
+.button:hover {
+    -fx-background-color: #4c5052;
+}
+
+.button:pressed {
+    -fx-background-color: #4c5052;
+}
+
+.menu-button > .arrow-button {
+    -fx-padding: 0;
+}
+
+.menu-button > .arrow-button > .arrow {
+    -fx-padding: 0;
+}
+
+
+.menu-button#runBtn:hover, .menu-button#debugBtn:hover {
+    -fx-background-color: #4c5052;
+}
+
+.menu-button#runBtn:pressed, .menu-button#debugBtn:pressed  {
+    -fx-background-color: #4c5052;
+}

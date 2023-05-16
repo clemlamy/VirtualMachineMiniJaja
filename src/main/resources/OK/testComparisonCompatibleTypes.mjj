@@ -1,0 +1,9 @@
+class Test {
+    int x = 15;
+    int y = 42; 
+
+    main {
+        if(x == y) {write("pas bon");};
+        write("ok");
+    }
+}

@@ -1,0 +1,9 @@
+class Test {
+    int testFunction() {
+        return 42;
+    };
+    main {
+        int returnedValue = testFunction();
+        write(returnedValue);
+    }
+}

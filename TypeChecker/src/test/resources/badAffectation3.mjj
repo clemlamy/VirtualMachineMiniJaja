@@ -1,0 +1,10 @@
+class test{
+    int meth(){
+        return 0;
+    };
+
+    main{
+        int i = 0;
+        meth = i;
+    }
+}

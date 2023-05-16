@@ -1,0 +1,8 @@
+class Test {
+
+
+    main {
+        int z = 4 * 3;
+        write(z);
+    }
+}

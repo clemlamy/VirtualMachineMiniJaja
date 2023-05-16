@@ -1,0 +1,8 @@
+class Test {
+    
+    final int var = 42;
+    main {
+            final int var = 666;
+            write(var);
+    }
+}

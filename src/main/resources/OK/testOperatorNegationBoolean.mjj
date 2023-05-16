@@ -1,0 +1,6 @@
+class Test {
+
+    main {
+        if(!false) {write("ok");};
+    }
+}

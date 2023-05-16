@@ -1,0 +1,10 @@
+class TestFunctionWrongParam {
+    void test(int param1, int param2) {
+        
+    };
+
+    main {
+        int param = 5;
+        test(param);
+    }
+}

@@ -1,0 +1,9 @@
+class TestFunctionNoReturn {
+    int test() {
+        int toto = 5;
+    };
+
+    main {
+        int res = test();
+    }
+}

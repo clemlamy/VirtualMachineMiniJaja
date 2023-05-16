@@ -1,0 +1,10 @@
+class TestFunctionVoidAffectation {
+    void test() {
+        
+    };
+
+    main {
+        int res1 = test();
+        boolean res2 = test();
+    }
+}

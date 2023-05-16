@@ -1,0 +1,6 @@
+class TestArrayNegativeIndex {
+    main {
+        int tab[3];
+        int index = tab[-1];
+    }
+}

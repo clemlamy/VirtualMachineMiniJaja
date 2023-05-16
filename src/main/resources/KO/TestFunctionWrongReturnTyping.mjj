@@ -1,0 +1,9 @@
+class TestFunctionWrongReturnTyping {
+    void test() {
+        return 1;
+    };
+
+    main {
+        int res = test();
+    }
+}

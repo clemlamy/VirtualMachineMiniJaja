@@ -1,0 +1,6 @@
+class Test {
+
+    main {
+        if(42 == 42) {write("ok");};
+    }
+}

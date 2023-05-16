@@ -1,0 +1,8 @@
+class TestArrayDuplicatedDifferentTyping {
+    int tab[3];
+    boolean tab[5];
+    main {
+        //int tab[3];
+        //boolean tab[5];
+    }
+}

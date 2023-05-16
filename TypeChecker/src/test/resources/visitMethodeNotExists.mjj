@@ -1,0 +1,5 @@
+class test{
+    main{
+        int res = equals(1,2);
+    }
+}

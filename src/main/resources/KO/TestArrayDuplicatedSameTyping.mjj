@@ -1,0 +1,6 @@
+class TestArrayDuplicatedSameTyping {
+    main {
+        int tab[3];
+        int tab[5];
+    }
+}

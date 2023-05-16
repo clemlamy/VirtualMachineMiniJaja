@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>fr.ufrst.m1info.projetcomp.m1comp2</groupId>
+        <artifactId>myMiniJaja</artifactId>
+        <version>2.0</version>
+    </parent>
+
+    <artifactId>Analyser</artifactId>
+
+    <properties>
+        <!--<sonar.exclusions>**/analyser/jjc/*</sonar.exclusions>-->
+        <sonar.skip>true</sonar.skip>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>fr.ufrst.m1info.projetcomp.m1comp2</groupId>
+            <artifactId>AST</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.java.dev.javacc</groupId>
+            <artifactId>javacc</artifactId>
+            <version>7.0.12</version>
+        </dependency>
+    </dependencies>
+
+<!--    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>javacc-maven-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>minijaja</id>
+                        <goals>
+                            <goal>jjtree-javacc</goal>
+                        </goals>
+                        <configuration>
+                            <nodePackage>fr.ufrst.m1info.projetcomp.m1comp2.ast.mjj</nodePackage>
+                            <sourceDirectory>src/main/jjtree/mjj</sourceDirectory>
+                            <outputDirectory>src/main/java/</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>jajacode</id>
+                        <goals>
+                            <goal>jjtree-javacc</goal>
+                        </goals>
+                        <configuration>
+                            <nodePackage>fr.ufrst.m1info.projetcomp.m1comp2.ast.jjc</nodePackage>
+                            <sourceDirectory>src/main/jjtree/jjc</sourceDirectory>
+                            <outputDirectory>src/main/java</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>-->
+</project>

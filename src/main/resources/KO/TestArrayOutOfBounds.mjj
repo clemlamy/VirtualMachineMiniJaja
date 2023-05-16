@@ -1,0 +1,6 @@
+class TestArrayOutOfBounds {
+    main {
+        int tab[3];
+        int index = tab[3];
+    }
+}

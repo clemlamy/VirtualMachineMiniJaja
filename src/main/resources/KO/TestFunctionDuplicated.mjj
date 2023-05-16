@@ -1,0 +1,13 @@
+class TestFunctionDuplicated {
+    int test() {
+        return 1;
+    };
+
+    int test() {
+        return 2;
+    };
+
+    main {
+        int res = test();
+    }
+}

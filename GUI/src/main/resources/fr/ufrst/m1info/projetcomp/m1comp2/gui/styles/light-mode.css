@@ -1,0 +1,174 @@
+.menu-bar {
+    -fx-background-color: #f4f4f4;
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-width: 0.75;
+    -fx-border-color: #d9d9d9;
+}
+
+.styled-text-area .text {
+}
+
+.styled-text-area .selection {
+    -fx-fill: #A6D2FF;
+}
+
+.styled-text-area .text.keyword {
+    -fx-fill:blue;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.operator {
+    -fx-fill: MediumOrchid;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.function {
+    -fx-fill: orange;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.boolean {
+    -fx-fill: magenta;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.variable {
+    -fx-fill: black;
+}
+
+.styled-text-area .text.integer {
+    -fx-fill: Goldenrod;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.semicolon {
+    -fx-font-weight: bold;
+}
+
+
+.styled-text-area .text.paren {
+    -fx-fill: black;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.bracket {
+    -fx-fill: black;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.brace {
+    -fx-fill: black;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.string {
+    -fx-fill: purple;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.comment {
+    -fx-fill: green;
+    -fx-font-style: italic;
+}
+
+.styled-text-area#miniJajaTextArea .paragraph-box:has-caret {
+    -fx-background-color: #f2f9fc;
+}
+
+.styled-text-area#jajaCodeTextArea .paragraph-box:has-caret,
+.styled-text-area#miniJajaOutputArea .paragraph-box:has-caret,
+.styled-text-area#jajaCodeOutputArea .paragraph-box:has-caret {
+    -fx-background-color: transparent;
+}
+
+.styled-text-area .lineno {
+    -fx-background-color: transparent;
+}
+
+.styled-text-area .text.succeed {
+    -fx-fill: #489352;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.error {
+    -fx-fill: #C75450;
+    -fx-font-weight: bold;
+}
+
+.error-line {
+    -rtfx-background-color: rgb(255, 150, 150);
+}
+
+.debug-line {
+    -rtfx-background-color: rgb(200, 200, 200);
+}
+
+.line {
+    -rtfx-background-color: transparent;
+}
+
+.styled-text-area .text.warning {
+    -fx-fill: #CC7832;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .text.error-highlight {
+    -fx-fill: #C75450;
+    -fx-underline: true;
+    -fx-font-weight: bold;
+}
+
+.button#compileBtn {
+    -fx-text-fill: #489352;
+}
+
+.menu-button#debugBtn {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-text-alignment: center;
+    -fx-border-radius: 5;
+    -fx-text-fill: #489352;
+}
+
+.menu-button#runBtn {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-text-alignment: center;
+    -fx-border-radius: 5;
+    -fx-text-fill: #489352;
+}
+
+.button#stopBtn {
+    -fx-text-fill: #C75450;
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-text-alignment: center;
+    -fx-border-radius: 5;
+}
+
+.button:hover {
+    -fx-background-color: #DDDDDD;
+}
+
+.button:pressed {
+    -fx-background-color: #E7E7E7;
+}
+
+.menu-button > .arrow-button {
+    -fx-padding: 0;
+}
+
+.menu-button > .arrow-button > .arrow {
+    -fx-padding: 0;
+}
+
+.menu-button#runBtn:hover, .menu-button#debugBtn:hover {
+    -fx-background-color: #DDDDDD;
+}
+
+.menu-button#runBtn:pressed, .menu-button#debugBtn:pressed  {
+    -fx-background-color: #E7E7E7;
+}

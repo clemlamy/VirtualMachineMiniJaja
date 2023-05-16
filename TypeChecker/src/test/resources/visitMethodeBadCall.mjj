@@ -1,0 +1,8 @@
+class test{
+    void equals(int x, int y){
+        return 0;
+    };
+    main{
+        int res = equals(0,0);
+    }
+}

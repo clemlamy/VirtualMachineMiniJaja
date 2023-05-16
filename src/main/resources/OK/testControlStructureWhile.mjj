@@ -1,0 +1,7 @@
+class Test {
+
+    main {
+        while(false) {write("pas ok");};
+        write("ok");
+    }
+}

@@ -1,0 +1,25 @@
+class c {
+    final int SIZE = 5;
+    int tab[SIZE];
+
+    int add(int x, int y){
+        int sum = x + y;
+        return sum;
+    };
+
+    void printInt(int x){
+        write(x);
+    };
+
+    main{
+        int i = 0;
+        while(i < 5){
+            i++;
+        };
+
+        if(i == SIZE){ // && length(tab) == SIZE){
+            writeln("i + 3 equals:");
+            printInt(add(i,3));
+        };
+    }
+}

@@ -1,0 +1,46 @@
+class test{
+    boolean f = true;
+
+    int equals(int x, int y){
+        if(x == y){
+            return 0;
+        };
+        return -1;
+    };
+
+    int equals(boolean x){
+        if(x == f){
+            return 0;
+        }else{
+            return -1;
+        };
+    };
+
+    boolean invert(boolean x){
+        boolean res = !x;
+        return res;
+    };
+
+    void empty(){
+    };
+
+    void hello(){
+        writeln("HELLO");
+    };
+
+
+    boolean invertt(boolean x){
+        boolean res = !x;
+        return res;
+    };
+
+
+
+    main{
+        int call1 = equals(1,2);
+        int call2 = equals(false);
+        boolean call3 = invert(false);
+        empty();
+        hello();
+    }
+}

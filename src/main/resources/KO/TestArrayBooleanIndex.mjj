@@ -1,0 +1,6 @@
+class TestArrayBooleanIndex {
+    main {
+        int tab[3];
+        int index0 = tab[false];
+    }
+}
