@@ -492,7 +492,7 @@ public class InterpreterMjjVisitorTest {
         tableau.jjtAddChild(ident, 1);
         tableau.jjtAddChild(nbre, 2);
 
-        Object res = tableau.jjtAccept(interpreterVisitor,  InterpreterMode.DEFAULT);
+        tableau.jjtAccept(interpreterVisitor,  InterpreterMode.DEFAULT);
 
         //check return
         Assert.assertEquals(1, memory.getValue("t"));
@@ -566,7 +566,7 @@ public class InterpreterMjjVisitorTest {
         tableau.jjtAddChild(ident, 1);
         tableau.jjtAddChild(nbre, 2);
 
-        Object res = tableau.jjtAccept(interpreterVisitor,  InterpreterMode.DEFAULT);
+        tableau.jjtAccept(interpreterVisitor,  InterpreterMode.DEFAULT);
 
         ASTtab tab = new ASTtab(JJTTAB);
         ASTnbre index = new ASTnbre(JJTNBRE);
@@ -595,7 +595,7 @@ public class InterpreterMjjVisitorTest {
         tableau.jjtAddChild(ident, 1);
         tableau.jjtAddChild(nbre, 2);
 
-        Object res = tableau.jjtAccept(interpreterVisitor,  InterpreterMode.DEFAULT);
+        tableau.jjtAccept(interpreterVisitor,  InterpreterMode.DEFAULT);
 
         ASTtab tab = new ASTtab(JJTTAB);
         ASTnbre index = new ASTnbre(JJTNBRE);
@@ -1017,7 +1017,7 @@ public class InterpreterMjjVisitorTest {
 
         nodeWrite.jjtAddChild(nodeString, 0);
 
-        Object res = nodeWrite.jjtAccept(interpreterVisitor,  InterpreterMode.DEFAULT);
+        nodeWrite.jjtAccept(interpreterVisitor,  InterpreterMode.DEFAULT);
         Assert.assertEquals("Hello World!",interpreterVisitor.toString());
     }
 
@@ -1029,7 +1029,7 @@ public class InterpreterMjjVisitorTest {
 
         nodeWriteln.jjtAddChild(nodeString, 0);
 
-        Object res = nodeWriteln.jjtAccept(interpreterVisitor,  InterpreterMode.DEFAULT);
+        nodeWriteln.jjtAccept(interpreterVisitor,  InterpreterMode.DEFAULT);
         Assert.assertEquals("Hello World!\n",interpreterVisitor.toString());
     }
 
@@ -1059,7 +1059,7 @@ public class InterpreterMjjVisitorTest {
         nodeAssignment2.jjtAddChild(makeIdent("x"), 0);
         nodeAssignment2.jjtAddChild(makeNumber(24), 1);
 
-        Object res = nodeIf.jjtAccept(interpreterVisitor,  InterpreterMode.DEFAULT);
+        nodeIf.jjtAccept(interpreterVisitor,  InterpreterMode.DEFAULT);
         Assert.assertEquals(42,memory.getValue("x"));
     }
 
@@ -1086,7 +1086,7 @@ public class InterpreterMjjVisitorTest {
         nodeAssignment.jjtAddChild(makeIdent("x"), 0);
         nodeAssignment.jjtAddChild(makeNumber(1), 1);
 
-        Object res = nodeWhile.jjtAccept(interpreterVisitor,  InterpreterMode.DEFAULT);
+        nodeWhile.jjtAccept(interpreterVisitor,  InterpreterMode.DEFAULT);
         Assert.assertEquals(1,memory.getValue("x"));
     }
 }

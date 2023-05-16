@@ -5,8 +5,6 @@ import fr.ufrst.m1info.projetcomp.m1comp2.ast.commons.Type;
 import fr.ufrst.m1info.projetcomp.m1comp2.ast.mjj.*;
 import fr.ufrst.m1info.projetcomp.m1comp2.interpreters.shared.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 public class InterpreterMjjVisitor implements MiniJajaVisitor {
@@ -58,28 +56,6 @@ public class InterpreterMjjVisitor implements MiniJajaVisitor {
     @Override
     public String toString() {
         return output;
-    }
-
-    private String headerToString(ASTentetes headers,String name) throws InterpreterException, VisitorException {
-        // int res(int x, int y)
-        // => res@res:INTEGER,INTEGER,
-        // => f@global
-        // => f@main
-        StringBuilder res = new StringBuilder(name+":");
-        Type currType;
-
-        while (!(headers.jjtGetChild(1) instanceof ASTenil)){
-            currType = (Type) headers.jjtGetChild(0).jjtGetChild(0).jjtAccept(this,null);
-            res.append(currType);
-            if(!(headers.jjtGetChild(1) instanceof ASTenil)){
-                res.append(InterpreterMjj.PARAM_SEPARATOR);
-            }
-            headers = (ASTentetes) headers.jjtGetChild(1);
-        }
-        currType = (Type) headers.jjtGetChild(0).jjtGetChild(0).jjtAccept(this,null);
-        res.append(currType);
-
-        return  res.toString();
     }
 
     @Override

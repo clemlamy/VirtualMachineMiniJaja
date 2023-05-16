@@ -1,7 +1,7 @@
 module fr.ufrst.m1info.projetcomp.m1comp2.gui {
-    requires javafx.controls;
+    requires transitive javafx.controls;
     requires javafx.fxml;
-    requires org.fxmisc.richtext;
+    requires transitive org.fxmisc.richtext;
     requires reactfx;
     requires Analyser;
     requires AST;

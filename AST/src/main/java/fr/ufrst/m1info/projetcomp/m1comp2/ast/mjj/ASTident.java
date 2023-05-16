@@ -10,8 +10,6 @@ class ASTident extends SimpleNode {
     super(id);
   }
 
-  private String ident;
-
   /** Accept the visitor. **/
   public Object jjtAccept(MiniJajaVisitor visitor, Object data) throws VisitorException {
 

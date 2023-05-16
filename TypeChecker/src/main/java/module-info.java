@@ -1,5 +1,5 @@
 module fr.ufrst.m1info.projetcomp.m1comp2 {
-    requires AST;
-    requires Memory;
+    requires transitive AST;
+    requires transitive Memory;
     exports fr.ufrst.m1info.projetcomp.typecheker;
 }

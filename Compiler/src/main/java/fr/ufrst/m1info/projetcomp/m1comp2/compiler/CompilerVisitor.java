@@ -10,7 +10,6 @@ import fr.ufrst.m1info.projetcomp.m1comp2.ast.mjj.*;
 import java.util.ArrayList;
 
 import static fr.ufrst.m1info.projetcomp.m1comp2.ast.jjc.JajaCodeTreeConstants.*;
-import static fr.ufrst.m1info.projetcomp.m1comp2.ast.mjj.MiniJajaTreeConstants.JJTIDENT;
 import static fr.ufrst.m1info.projetcomp.m1comp2.ast.mjj.MiniJajaTreeConstants.JJTNBRE;
 
 public class CompilerVisitor implements MiniJajaVisitor {
@@ -77,12 +76,6 @@ public class CompilerVisitor implements MiniJajaVisitor {
     @Override
     public Object visit(ASTvnil node, Object data) {
         return 0;
-    }
-
-    private ASTident makeIdent(String ident) {
-        var nodeIdent = new ASTident(JJTIDENT);
-        nodeIdent.jjtSetValue(ident);
-        return nodeIdent;
     }
 
     @Override
@@ -229,7 +222,6 @@ public class CompilerVisitor implements MiniJajaVisitor {
     public Object visit(ASTvar node, Object data) throws VisitorException {
         var cdata = (CompilerData) data;
         var mode = (CompilerMode) cdata.args[1];
-        var n = (Integer) cdata.args[0];
 
         if (mode == CompilerMode.DEFAULT) {
             var nodeNew = createNodeNew(node, 0, false);
@@ -365,7 +357,6 @@ public class CompilerVisitor implements MiniJajaVisitor {
         return 0;
     }
 
-    //TODO le node instr n'est peut etre pas bon
     @Override
     public Object visit(ASTinstr node, Object data) {
         return 0;

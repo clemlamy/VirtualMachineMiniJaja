@@ -20,7 +20,7 @@ public class TypeChecker {
     public TypeChecker(Node node,SymbolTable symbolTable){
         root = node;
         this.symbolTable = symbolTable;
-        visitor = new TypeCheckerVisitor(symbolTable);
+        visitor = new TypeCheckerVisitor(this.symbolTable);
     }
 
     public void typeCheck() throws VisitorException {

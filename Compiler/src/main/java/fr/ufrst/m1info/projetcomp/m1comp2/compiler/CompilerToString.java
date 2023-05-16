@@ -2,7 +2,6 @@ package fr.ufrst.m1info.projetcomp.m1comp2.compiler;
 
 import fr.ufrst.m1info.projetcomp.m1comp2.ast.jjc.Node;
 import fr.ufrst.m1info.projetcomp.m1comp2.ast.jjc.SimpleNode;
-import fr.ufrst.m1info.projetcomp.m1comp2.ast.mjj.ASTtableau;
 
 import java.util.List;
 

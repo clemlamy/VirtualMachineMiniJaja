@@ -6,8 +6,6 @@ import fr.ufrst.m1info.projetcomp.m1comp2.ast.commons.Type;
 import fr.ufrst.m1info.projetcomp.m1comp2.ast.jjc.*;
 
 import fr.ufrst.m1info.projetcomp.m1comp2.ast.mjj.VisitorException;
-import fr.ufrst.m1info.projetcomp.m1comp2.ast.mjj.VisitorException;
-import fr.ufrst.m1info.projetcomp.m1comp2.interpreters.shared.InterpreterMode;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;

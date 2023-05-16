@@ -2,7 +2,6 @@ package fr.ufrst.m1info.projetcomp.m1comp2;
 
 import fr.ufrst.m1info.projetcomp.m1comp2.ast.commons.Type;
 
-import java.nio.file.FileSystemAlreadyExistsException;
 import java.util.*;
 
 public class Heap {

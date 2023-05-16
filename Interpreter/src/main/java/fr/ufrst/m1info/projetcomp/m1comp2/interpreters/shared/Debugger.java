@@ -15,11 +15,8 @@ import java.util.TreeSet;
 public class Debugger {
     private List<Observer> listeners;
     private Thread thread;
-    private int state;
     private InterpreterJjc interpreterJjc;
     private InterpreterMjj interpreterMjj;
-    public static final int STATE_RUNNING = 1;
-    public static final int STATE_PAUSED = 1;
     private Set<Integer> breakPoints;
 
     private int currentId;
@@ -138,7 +135,6 @@ public class Debugger {
     }
 
     public synchronized void next(){
-        state = STATE_RUNNING;
         notifyAll();
         alertObservers();
     }
@@ -156,7 +152,6 @@ public class Debugger {
             stop();
             return;
         }
-        state = STATE_PAUSED;
         alertObservers();
         if(getMinBreak() < currentId){
             wait();
@@ -174,7 +169,6 @@ public class Debugger {
             stop();
             return;
         }
-        state = STATE_PAUSED;
         alertObservers();
         if(getMinBreak() < currentId){
             wait();

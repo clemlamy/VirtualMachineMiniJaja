@@ -10,8 +10,6 @@ class ASTnbre extends SimpleNode {
     super(id);
   }
 
-  private int nombre;
-
   /** Accept the visitor. **/
   public Object jjtAccept(MiniJajaVisitor visitor, Object data) throws VisitorException {
 
