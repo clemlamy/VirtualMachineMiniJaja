@@ -27,15 +27,13 @@ public class ParseException extends Exception {
 
   /**
    * This constructor is used by the method "generateParseException"
-   * in the generated parser.  Calling this constructor generates
+   * in the generated parser. Calling this constructor generates
    * a new object of this type with the fields "currentToken",
    * "expectedTokenSequences", and "tokenImage" set.
    */
   public ParseException(Token currentTokenVal,
-                        int[][] expectedTokenSequencesVal,
-                        String[] tokenImageVal
-                       )
-  {
+      int[][] expectedTokenSequencesVal,
+      String[] tokenImageVal) {
     super(initialise(currentTokenVal, expectedTokenSequencesVal, tokenImageVal));
     currentToken = currentTokenVal;
     expectedTokenSequences = expectedTokenSequencesVal;
@@ -44,11 +42,11 @@ public class ParseException extends Exception {
 
   /**
    * The following constructors are for use by you for whatever
-   * purpose you can think of.  Constructing the exception in this
+   * purpose you can think of. Constructing the exception in this
    * manner makes the exception behave in the normal way - i.e., as
-   * documented in the class "Throwable".  The fields "errorToken",
+   * documented in the class "Throwable". The fields "errorToken",
    * "expectedTokenSequences", and "tokenImage" do not contain
-   * relevant information.  The JavaCC generated code does not use
+   * relevant information. The JavaCC generated code does not use
    * these constructors.
    */
 
@@ -61,16 +59,15 @@ public class ParseException extends Exception {
     super(message);
   }
 
-
   /**
-   * This is the last token that has been consumed successfully.  If
+   * This is the last token that has been consumed successfully. If
    * this object has been created due to a parse error, the token
    * following this token will (therefore) be the first error token.
    */
   public Token currentToken;
 
   /**
-   * Each entry in this array is an array of integers.  Each array
+   * Each entry in this array is an array of integers. Each array
    * of integers represents a sequence of tokens (by their ordinal
    * values) that is expected at this point of the parse.
    */
@@ -78,21 +75,21 @@ public class ParseException extends Exception {
 
   /**
    * This is a reference to the "tokenImage" array of the generated
-   * parser within which the parse error occurred.  This array is
+   * parser within which the parse error occurred. This array is
    * defined in the generated ...Constants interface.
    */
   public String[] tokenImage;
 
   /**
    * It uses "currentToken" and "expectedTokenSequences" to generate a parse
-   * error message and returns it.  If this object has been created
+   * error message and returns it. If this object has been created
    * due to a parse error, and you do not catch it (it gets thrown
    * from the parser) the correct error message
    * gets displayed.
    */
   private static String initialise(Token currentToken,
-                           int[][] expectedTokenSequences,
-                           String[] tokenImage) {
+      int[][] expectedTokenSequences,
+      String[] tokenImage) {
 
     StringBuilder expected = new StringBuilder();
     int maxSize = 0;
@@ -111,7 +108,8 @@ public class ParseException extends Exception {
     String retval = "Encountered \"";
     Token tok = currentToken.next;
     for (int i = 0; i < maxSize; i++) {
-      if (i != 0) retval += " ";
+      if (i != 0)
+        retval += " ";
       if (tok.kind == 0) {
         retval += tokenImage[0];
         break;
@@ -126,22 +124,20 @@ public class ParseException extends Exception {
       retval += "\" at line " + currentToken.next.beginLine + ", column " + currentToken.next.beginColumn;
     }
     retval += "." + EOL;
-    
-    
+
     if (expectedTokenSequences.length == 0) {
-        // Nothing to add here
+      // Nothing to add here
     } else {
-	    if (expectedTokenSequences.length == 1) {
-	      retval += "Was expecting:" + EOL + "    ";
-	    } else {
-	      retval += "Was expecting one of:" + EOL + "    ";
-	    }
-	    retval += expected.toString();
+      if (expectedTokenSequences.length == 1) {
+        retval += "Was expecting:" + EOL + "    ";
+      } else {
+        retval += "Was expecting one of:" + EOL + "    ";
+      }
+      retval += expected.toString();
     }
-    
+
     return retval;
   }
-
 
   /**
    * Used to convert raw characters to their escaped version
@@ -149,47 +145,49 @@ public class ParseException extends Exception {
    * string literal.
    */
   static String add_escapes(String str) {
-      StringBuilder retval = new StringBuilder();
-      char ch;
-      for (int i = 0; i < str.length(); i++) {
-        switch (str.charAt(i))
-        {
-           case '\b':
-              retval.append("\\b");
-              continue;
-           case '\t':
-              retval.append("\\t");
-              continue;
-           case '\n':
-              retval.append("\\n");
-              continue;
-           case '\f':
-              retval.append("\\f");
-              continue;
-           case '\r':
-              retval.append("\\r");
-              continue;
-           case '\"':
-              retval.append("\\\"");
-              continue;
-           case '\'':
-              retval.append("\\\'");
-              continue;
-           case '\\':
-              retval.append("\\\\");
-              continue;
-           default:
-              if ((ch = str.charAt(i)) < 0x20 || ch > 0x7e) {
-                 String s = "0000" + Integer.toString(ch, 16);
-                 retval.append("\\u" + s.substring(s.length() - 4, s.length()));
-              } else {
-                 retval.append(ch);
-              }
-              continue;
-        }
+    StringBuilder retval = new StringBuilder();
+    char ch;
+    for (int i = 0; i < str.length(); i++) {
+      switch (str.charAt(i)) {
+        case '\b':
+          retval.append("\\b");
+          continue;
+        case '\t':
+          retval.append("\\t");
+          continue;
+        case '\n':
+          retval.append("\\n");
+          continue;
+        case '\f':
+          retval.append("\\f");
+          continue;
+        case '\r':
+          retval.append("\\r");
+          continue;
+        case '\"':
+          retval.append("\\\"");
+          continue;
+        case '\'':
+          retval.append("\\\'");
+          continue;
+        case '\\':
+          retval.append("\\\\");
+          continue;
+        default:
+          if ((ch = str.charAt(i)) < 0x20 || ch > 0x7e) {
+            String s = "0000" + Integer.toString(ch, 16);
+            retval.append("\\u" + s.substring(s.length() - 4, s.length()));
+          } else {
+            retval.append(ch);
+          }
+          continue;
       }
-      return retval.toString();
-   }
+    }
+    return retval.toString();
+  }
 
 }
-/* JavaCC - OriginalChecksum=1108b5990b23221daee2cc71d04e672b (do not edit this line) */
+/*
+ * JavaCC - OriginalChecksum=1108b5990b23221daee2cc71d04e672b (do not edit this
+ * line)
+ */
